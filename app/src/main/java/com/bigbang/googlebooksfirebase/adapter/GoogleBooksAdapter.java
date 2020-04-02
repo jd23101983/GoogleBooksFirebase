@@ -56,7 +56,9 @@ public class GoogleBooksAdapter extends RecyclerView.Adapter<GoogleBooksAdapter.
     public void onBindViewHolder(@NonNull BookViewHolder holder, int position) {
 
         //holder.bookTitle = bookTitle.findViewById(R.id.book_title_textview);
+        Log.d("TAG_X", "Book ImageURL: " + bookResults.get(position).getVolumeInfo().getImageLinks().getThumbnail());
         Log.d("TAG_X", "Book Title: " + bookResults.get(position).getVolumeInfo().getTitle());
+        Log.d("TAG_X", "Book Authors: " + bookResults.get(position).getVolumeInfo().getAuthors().toString());
 
         //if (bookResults.get(position) != null) {
         try {

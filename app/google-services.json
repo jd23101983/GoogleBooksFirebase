@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "914164935043",
+    "firebase_url": "https://bookfavorites.firebaseio.com",
+    "project_id": "bookfavorites",
+    "storage_bucket": "bookfavorites.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:914164935043:android:babab02037be6fb2e76eb6",
+        "android_client_info": {
+          "package_name": "com.bigbang.googlebooksfirebase"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "914164935043-1cqpdeh7m5jrn4fvdqtljphgbb24l56g.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDB6LOw3jZ31FdxhvgD2m0jI-yLDnC0Rww"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "914164935043-1cqpdeh7m5jrn4fvdqtljphgbb24l56g.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
