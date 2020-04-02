@@ -21,9 +21,6 @@ import com.bumptech.glide.Glide;
 
 import java.util.List;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
-
 import static com.bigbang.googlebooksfirebase.util.DebugLogger.logDebug;
 
 public class GoogleBooksAdapter extends RecyclerView.Adapter<GoogleBooksAdapter.BookViewHolder> {
@@ -31,9 +28,6 @@ public class GoogleBooksAdapter extends RecyclerView.Adapter<GoogleBooksAdapter.
     private List<Item> bookResults;
     private ViewGroup theParent;
     private BooksDB booksDB;
-
-    //ImageView bookImage;
-    //TextView bookTitle;
 
     public GoogleBooksAdapter(List<Item> bookResults) {
         this.bookResults = bookResults;

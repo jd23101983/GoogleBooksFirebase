@@ -32,7 +32,6 @@ public class MainActivity extends AppCompatActivity {
     private CompositeDisposable compositeDisposable = new CompositeDisposable(); // RxJava
     private BooksDB booksDB;
 
-    // Kotlin Changes
     RecyclerView bookResultsRecyclerView;
     EditText searchEditText;
     Button searchButton;
@@ -51,33 +50,23 @@ public class MainActivity extends AppCompatActivity {
                 .allowMainThreadQueries()
                 .build();
 
-
         bookResultsRecyclerView = findViewById(R.id.book_results_recycler_view);
         searchEditText = findViewById(R.id.search_edittext);
         searchButton = findViewById(R.id.search_button);
 
         searchButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                Log.d("TAG_X", "searchButton clicked . . . ");
-                Log.d("TAG_X", "searchEditText value: " + searchEditText.getText().toString().trim());
                 performSearch();
             }
         });
-
-        Log.d("TAG_X","LEAVING ONCREATE()");
-
     }
 
 
     public void performSearch() {
 
-        Log.d("TAG_X","INSIDE performSearch()");
-
         String search_terms = searchEditText.getText().toString().trim();
         searchEditText.setText("");
         searchEditText.clearFocus();
-
-        Log.d("TAG_X","search_terms = " + search_terms);
 
         // RxJava
         compositeDisposable.add(googleBooksViewModel.getGoogleBooksRx(search_terms, Constants.API_KEY).subscribe(googleBookResults -> {
