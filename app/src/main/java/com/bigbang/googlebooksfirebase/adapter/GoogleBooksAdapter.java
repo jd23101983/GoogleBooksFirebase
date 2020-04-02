@@ -1,5 +1,6 @@
 package com.bigbang.googlebooksfirebase.adapter;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -31,6 +32,9 @@ public class GoogleBooksAdapter extends RecyclerView.Adapter<GoogleBooksAdapter.
     private ViewGroup theParent;
     private BooksDB booksDB;
 
+    //ImageView bookImage;
+    //TextView bookTitle;
+
     public GoogleBooksAdapter(List<Item> bookResults) {
         this.bookResults = bookResults;
     }
@@ -57,14 +61,19 @@ public class GoogleBooksAdapter extends RecyclerView.Adapter<GoogleBooksAdapter.
     @Override
     public void onBindViewHolder(@NonNull BookViewHolder holder, int position) {
 
+        //holder.bookTitle = bookTitle.findViewById(R.id.book_title_textview);
+        Log.d("TAG_X", "Book Title: " + bookResults.get(position).getVolumeInfo().getTitle());
+
         //if (bookResults.get(position) != null) {
         try {
             //if (!bookResults.get(position).getVolumeInfo().getImageLinks().getThumbnail().equals(null)) {
             if (bookResults.get(position) != null) {
+
                 Glide.with(theParent.getContext())
                         .load(bookResults.get(position).getVolumeInfo().getImageLinks().getThumbnail())
                         .placeholder(R.drawable.button_background)
                         .into(holder.bookImage);
+
                 holder.bookTitle.setText(bookResults.get(position).getVolumeInfo().getTitle());
                 holder.bookAuthors.setText(bookResults.get(position).getVolumeInfo().getAuthors().toString());
                 holder.bookFavorite.setText("Favorite: ");
@@ -108,24 +117,20 @@ public class GoogleBooksAdapter extends RecyclerView.Adapter<GoogleBooksAdapter.
 
     class BookViewHolder extends RecyclerView.ViewHolder {
 
-        @BindView(R.id.book_image)
         ImageView bookImage;
-
-        @BindView(R.id.book_title_textview)
         TextView bookTitle;
-
-        @BindView(R.id.book_authors_textview)
         TextView bookAuthors;
-
-        @BindView(R.id.book_favorite_textview)
         TextView bookFavorite;
-
-        @BindView(R.id.book_favorite_togglebutton)
         ToggleButton favoriteToggleButton;
 
         public BookViewHolder(@NonNull View itemView) {
             super(itemView);
-            ButterKnife.bind(this, itemView);
+
+            bookImage = itemView.findViewById(R.id.book_image);
+            bookTitle = itemView.findViewById(R.id.book_title_textview);
+            bookAuthors = itemView.findViewById(R.id.book_authors_textview);
+            bookFavorite = itemView.findViewById(R.id.book_favorite_textview);
+            favoriteToggleButton = itemView.findViewById(R.id.book_favorite_togglebutton);
         }
     }
 

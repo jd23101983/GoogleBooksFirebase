@@ -22,39 +22,25 @@ import com.bigbang.googlebooksfirebase.viewmodel.GoogleBooksViewModel;
 
 import java.util.List;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
 import io.reactivex.disposables.CompositeDisposable;
 
 import static com.bigbang.googlebooksfirebase.util.DebugLogger.logDebug;
 
 public class MainActivity extends AppCompatActivity {
 
-    @BindView(R.id.search_edittext)
-    EditText searchEditText;
-
-    @BindView(R.id.book_results_recycler_view)
-    RecyclerView bookResultsRecyclerView;
-
     private GoogleBooksViewModel googleBooksViewModel;
     private CompositeDisposable compositeDisposable = new CompositeDisposable(); // RxJava
     private BooksDB booksDB;
 
     // Kotlin Changes
+    RecyclerView bookResultsRecyclerView;
+    EditText searchEditText;
     Button searchButton;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        Log.d("TAG_X","BEFORE BUTTERKNIFE BIND");
-
-        ButterKnife.bind(this);
-
-        Log.d("TAG_X","AFTER BUTTERKNIFE BIND");
 
         googleBooksViewModel = ViewModelProviders.of(this).get(GoogleBooksViewModel.class);
 
@@ -82,33 +68,10 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    /*
-    @OnClick(R.id.search_button)
-    public void performSearch(View view) {
-
-        Log.d("TAG_X","INSIDE @OnClick() - performSearch()");
-
-
-        String search_terms = searchEditText.getText().toString().trim();
-        searchEditText.setText("");
-        searchEditText.clearFocus();
-
-        Log.d("TAG_X","search_terms = " + search_terms);
-
-        // RxJava
-        compositeDisposable.add(googleBooksViewModel.getGoogleBooksRx(search_terms, Constants.API_KEY).subscribe(googleBookResults -> {
-            displayInformationRx(googleBookResults.getItems());
-        }, throwable -> {
-            DebugLogger.logError(throwable);
-        }));
-    }
-    */
-
 
     public void performSearch() {
 
         Log.d("TAG_X","INSIDE performSearch()");
-
 
         String search_terms = searchEditText.getText().toString().trim();
         searchEditText.setText("");
