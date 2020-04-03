@@ -1,6 +1,6 @@
 package com.bigbang.googlebooksfirebase.adapter;
 
-import android.util.Log;
+import android.app.Application;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,24 +10,23 @@ import android.widget.TextView;
 import android.widget.ToggleButton;
 
 import androidx.annotation.NonNull;
+import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.RecyclerView;
-import androidx.room.Room;
 
 import com.bigbang.googlebooksfirebase.R;
-import com.bigbang.googlebooksfirebase.database.BookEntity;
-import com.bigbang.googlebooksfirebase.database.BooksDB;
+import com.bigbang.googlebooksfirebase.model.Book;
 import com.bigbang.googlebooksfirebase.model.Item;
+import com.bigbang.googlebooksfirebase.view.MainActivity;
+import com.bigbang.googlebooksfirebase.viewmodel.GoogleBooksViewModel;
 import com.bumptech.glide.Glide;
-
 import java.util.List;
-
 import static com.bigbang.googlebooksfirebase.util.DebugLogger.logDebug;
 
 public class GoogleBooksAdapter extends RecyclerView.Adapter<GoogleBooksAdapter.BookViewHolder> {
 
+    private GoogleBooksViewModel googleBooksViewModel;
     private List<Item> bookResults;
     private ViewGroup theParent;
-    private BooksDB booksDB;
 
     public GoogleBooksAdapter(List<Item> bookResults) {
         this.bookResults = bookResults;
@@ -38,13 +37,7 @@ public class GoogleBooksAdapter extends RecyclerView.Adapter<GoogleBooksAdapter.
     public BookViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 
         theParent = parent;
-
-        booksDB = Room.databaseBuilder(
-                theParent.getContext(),
-                BooksDB.class,
-                "books.db")
-                .allowMainThreadQueries()
-                .build();
+        googleBooksViewModel = ViewModelProviders.of((MainActivity)theParent.getContext()).get(GoogleBooksViewModel.class);
 
         View view = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.book_item_layout, parent, false);
@@ -55,10 +48,9 @@ public class GoogleBooksAdapter extends RecyclerView.Adapter<GoogleBooksAdapter.
     @Override
     public void onBindViewHolder(@NonNull BookViewHolder holder, int position) {
 
-        //holder.bookTitle = bookTitle.findViewById(R.id.book_title_textview);
-        Log.d("TAG_X", "Book ImageURL: " + bookResults.get(position).getVolumeInfo().getImageLinks().getThumbnail());
-        Log.d("TAG_X", "Book Title: " + bookResults.get(position).getVolumeInfo().getTitle());
-        Log.d("TAG_X", "Book Authors: " + bookResults.get(position).getVolumeInfo().getAuthors().toString());
+        //logDebug("Book ImageURL: " + bookResults.get(position).getVolumeInfo().getImageLinks().getThumbnail());
+        //logDebug("Book Title: " + bookResults.get(position).getVolumeInfo().getTitle());
+        //logDebug("Book Authors: " + bookResults.get(position).getVolumeInfo().getAuthors().toString());
 
         //if (bookResults.get(position) != null) {
         try {
@@ -81,12 +73,10 @@ public class GoogleBooksAdapter extends RecyclerView.Adapter<GoogleBooksAdapter.
                         if(isChecked)
                         {
                             logDebug("Favorite Selected");
-/*
-                            booksDB.getBookDAO().addNewBook(new BookEntity (
+                            googleBooksViewModel.addBookToFavorites(new Book(
                                     bookResults.get(position).getVolumeInfo().getImageLinks().getThumbnail(),
                                     bookResults.get(position).getVolumeInfo().getTitle(),
-                                    bookResults.get(position).getVolumeInfo().getAuthors().toString()));
-*/
+                                    bookResults.get(position).getVolumeInfo().getAuthors().toString() ));
                         }
                         else
                         {

@@ -32,9 +32,8 @@ public class MainActivity extends AppCompatActivity {
     private GoogleBooksViewModel googleBooksViewModel;
     private CompositeDisposable compositeDisposable = new CompositeDisposable(); // RxJava
 
+    // TODO: remove
     private DatabaseReference reference;
-
-    //private BooksDB booksDB;
 
     RecyclerView bookResultsRecyclerView;
     EditText searchEditText;
@@ -47,7 +46,10 @@ public class MainActivity extends AppCompatActivity {
 
         googleBooksViewModel = ViewModelProviders.of(this).get(GoogleBooksViewModel.class);
 
+/*
+TODO: remove
         // Firebase
+
         reference = FirebaseDatabase.getInstance().getReference().child("books");
 
         Book book = new Book(
@@ -60,16 +62,7 @@ public class MainActivity extends AppCompatActivity {
             reference.child(pushValue).setValue(book);
         else
             Log.d("TAG_X", "db update failed");
-
-
-        /*
-        booksDB = Room.databaseBuilder(
-                this,
-                BooksDB.class,
-                "books.db")
-                .allowMainThreadQueries()
-                .build();
-        */
+*/
 
         bookResultsRecyclerView = findViewById(R.id.book_results_recycler_view);
         searchEditText = findViewById(R.id.search_edittext);
@@ -81,7 +74,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
-
 
     public void performSearch() {
 
