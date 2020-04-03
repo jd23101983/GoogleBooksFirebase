@@ -37,7 +37,7 @@ public class FavoriteBookAdapter extends RecyclerView.Adapter<FavoriteBookAdapte
         googleBooksViewModel = ViewModelProviders.of((MainActivity)theParent.getContext()).get(GoogleBooksViewModel.class);
 
         View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.book_item_layout, parent, false);
+                .inflate(R.layout.favorite_book_item_layout, parent, false);
 
         return new FavoriteBookViewHolder(view);
     }
@@ -77,9 +77,9 @@ public class FavoriteBookAdapter extends RecyclerView.Adapter<FavoriteBookAdapte
         public FavoriteBookViewHolder(@NonNull View itemView) {
             super(itemView);
 
-            bookImage = itemView.findViewById(R.id.book_image);
-            bookTitle = itemView.findViewById(R.id.book_title_textview);
-            bookAuthors = itemView.findViewById(R.id.book_authors_textview);
+            bookImage = itemView.findViewById(R.id.fav_book_image);
+            bookTitle = itemView.findViewById(R.id.fav_book_title_textview);
+            bookAuthors = itemView.findViewById(R.id.fav_book_authors_textview);
         }
     }
 
