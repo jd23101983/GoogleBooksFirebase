@@ -32,12 +32,15 @@ public class MainActivity extends AppCompatActivity {
     private GoogleBooksViewModel googleBooksViewModel;
     private CompositeDisposable compositeDisposable = new CompositeDisposable(); // RxJava
 
+    private FavoritesFragment favoritesFragment = new FavoritesFragment();
+
     // TODO: remove
     private DatabaseReference reference;
 
     RecyclerView bookResultsRecyclerView;
     EditText searchEditText;
     Button searchButton;
+    Button favoritesButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,10 +48,11 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         googleBooksViewModel = ViewModelProviders.of(this).get(GoogleBooksViewModel.class);
-
+        favoritesFragment = new FavoritesFragment();
 /*
 TODO: remove
-        // Firebase
+
+        // Firebase - initial prime / testing
 
         reference = FirebaseDatabase.getInstance().getReference().child("books");
 
@@ -66,13 +70,21 @@ TODO: remove
 
         bookResultsRecyclerView = findViewById(R.id.book_results_recycler_view);
         searchEditText = findViewById(R.id.search_edittext);
-        searchButton = findViewById(R.id.search_button);
 
+        searchButton = findViewById(R.id.search_button);
         searchButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 performSearch();
             }
         });
+
+        favoritesButton = findViewById(R.id.favorites_button);
+        favoritesButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                showFavoritesFragment();
+            }
+        });
+
     }
 
     public void performSearch() {
@@ -89,6 +101,35 @@ TODO: remove
         }));
     }
 
+    public void showFavoritesFragment() {
+
+        favoritesFragment = new FavoritesFragment();
+
+        /*
+        Bundle repositoryBundle = new Bundle();
+
+        TransportObj transportObj = new TransportObj(movieResult);
+        repositoryBundle.putParcelable("FRAG_KEY", transportObj);
+        movieResultsFragment = new MovieResultsFragment();
+        //movieSearchFragment.setArguments(repositoryBundle);
+        movieResultsFragment.setArguments(repositoryBundle);
+*/
+        //Fragment fragment = getSupportFragmentManager().findFragmentById(R.id.results_frame);
+        //if(fragment != null)
+        //    getSupportFragmentManager().beginTransaction().remove(fragment).commit();
+
+//        getSupportFragmentManager()
+//                .beginTransaction()
+//                .add(R.id.search_frame, movieSearchFragment)
+//                .commit();
+
+        //DebugLogger.logDebug("showFragment...");
+
+        getSupportFragmentManager()
+                .beginTransaction()
+                .replace(R.id.favorite_book_frame, favoritesFragment)
+                .commit();
+    }
 
     @Override
     protected void onDestroy() {
@@ -115,6 +156,13 @@ TODO: remove
         GoogleBooksAdapter adapter = new GoogleBooksAdapter(googleBookResults);
         bookResultsRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         bookResultsRecyclerView.setAdapter(adapter);
+    }
+
+    public void backFromFavorites() {
+        getSupportFragmentManager()
+                .beginTransaction()
+                .remove(favoritesFragment)
+                .commit();
     }
 
 }

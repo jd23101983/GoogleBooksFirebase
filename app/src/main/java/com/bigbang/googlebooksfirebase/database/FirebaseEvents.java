@@ -53,7 +53,7 @@ public class FirebaseEvents {
                 logDebug("db error");
             }
         });
-        logDebug("Book List Size before return "+ bookList.size());
+        logDebug("Book List Size before return " + bookList.size());
         return bookListObservable;
     }
 

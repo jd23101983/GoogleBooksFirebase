@@ -11,6 +11,8 @@ import com.bigbang.googlebooksfirebase.model.Book;
 import com.bigbang.googlebooksfirebase.model.BookResultSet;
 import com.bigbang.googlebooksfirebase.network.GoogleBooksRetrofitInstance;
 
+import java.util.List;
+
 import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
@@ -38,4 +40,13 @@ public class GoogleBooksViewModel extends AndroidViewModel {
         firebaseEvents.addNewBook(book);
     }
 
+    public Observable<List<Book>> getBookList() {
+
+        Log.d("TAG_X", "inside HotelViewModel::getGuestList() . . . returning");
+
+        return  firebaseEvents
+                .getBookList()
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(Schedulers.io());
+    }
 }

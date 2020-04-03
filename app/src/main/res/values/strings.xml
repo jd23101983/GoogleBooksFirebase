@@ -1,4 +1,11 @@
 <resources>
     <string name="app_name">GoogleBooksFirebase</string>
     <string name="search">Search</string>
+    <string name="google_book_search">Google Book Search</string>
+    <string name="favorites">Favorites</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="favorite_books">Favorite Books</string>
+    <string name="back_to_search">Back To Search</string>
 </resources>
