@@ -4,24 +4,18 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
-import android.view.animation.Animation;
 import android.widget.Button;
 import android.widget.EditText;
-
 import com.bigbang.googlebooksfirebase.R;
 import com.bigbang.googlebooksfirebase.adapter.GoogleBooksAdapter;
-import com.bigbang.googlebooksfirebase.model.Book;
 import com.bigbang.googlebooksfirebase.model.Item;
 import com.bigbang.googlebooksfirebase.util.Constants;
 import com.bigbang.googlebooksfirebase.util.DebugLogger;
 import com.bigbang.googlebooksfirebase.viewmodel.GoogleBooksViewModel;
 import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.List;
 
@@ -52,26 +46,6 @@ public class MainActivity extends AppCompatActivity {
 
         googleBooksViewModel = ViewModelProviders.of(this).get(GoogleBooksViewModel.class);
         favoritesFragment = new FavoritesFragment();
-
-/*
-TODO: remove
-
-        // Firebase - initial prime / testing
-
-        reference = FirebaseDatabase.getInstance().getReference().child("books");
-
-        Book book = new Book(
-            "https://books.google.com/books/content?id=BjQ_HYN956gC&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api",
-            "Nerds",
-            "[David Anderegg]");
-
-        String pushValue = reference.push().getKey();
-        if (pushValue != null)
-            reference.child(pushValue).setValue(book);
-        else
-            Log.d("TAG_X", "db update failed");
-*/
-
         bookResultsRecyclerView = findViewById(R.id.book_results_recycler_view);
         searchEditText = findViewById(R.id.search_edittext);
 
@@ -108,6 +82,7 @@ TODO: remove
         }, throwable -> {
             DebugLogger.logError(throwable);
         }));
+
     }
 
     public void showFavoritesFragment() {
