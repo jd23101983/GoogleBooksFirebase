@@ -36,9 +36,9 @@ public class FavoritesFragment extends Fragment {
     private CompositeDisposable compositeDisposable = new CompositeDisposable();
     private List<Book> bookList = new ArrayList<>();
 
-    TextView favoriteBookTitle;
-    RecyclerView favoriteBookRecyclerView;
-    Button favoriteBackButton;
+    private TextView favoriteBookTitle;
+    private RecyclerView favoriteBookRecyclerView;
+    private Button favoriteBackButton;
 
     public FavoritesFragment() {
         // Required empty public constructor
@@ -64,7 +64,6 @@ public class FavoritesFragment extends Fragment {
             DebugLogger.logError(throwable);
         }));
 
-
         favoriteBookTitle = view.findViewById(R.id.favorite_books_textView);
         favoriteBookRecyclerView = view.findViewById(R.id.favorite_books_recycler_view);
         favoriteBackButton = view.findViewById(R.id.back_button);
@@ -74,14 +73,7 @@ public class FavoritesFragment extends Fragment {
                 ((MainActivity)getContext()).backFromFavorites();
             }
         });
-
-        //List<Result> results = (((TransportObj)getArguments().getParcelable("FRAG_KEY")).getMovieResults()).getResults();
-        //MovieResultSet results = ((TransportObj)getArguments().getParcelable("FRAG_KEY")).getMovieResults();
-
-        //MovieAdapter movieAdapter = new MovieAdapter(results);
-        //movieRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        //movieRecyclerView.setAdapter(movieAdapter);
-    }
+     }
 
     public void displayBooks(List<Book> newBookList) {
 

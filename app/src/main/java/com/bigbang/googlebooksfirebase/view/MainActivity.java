@@ -5,9 +5,11 @@ import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.animation.Animation;
 import android.widget.Button;
 import android.widget.EditText;
 
@@ -37,10 +39,11 @@ public class MainActivity extends AppCompatActivity {
     // TODO: remove
     private DatabaseReference reference;
 
-    RecyclerView bookResultsRecyclerView;
-    EditText searchEditText;
-    Button searchButton;
-    Button favoritesButton;
+    private RecyclerView bookResultsRecyclerView;
+    private EditText searchEditText;
+    private Button searchButton;
+    private Button favoritesButton;
+    private Button animationButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,6 +52,7 @@ public class MainActivity extends AppCompatActivity {
 
         googleBooksViewModel = ViewModelProviders.of(this).get(GoogleBooksViewModel.class);
         favoritesFragment = new FavoritesFragment();
+
 /*
 TODO: remove
 
@@ -85,6 +89,11 @@ TODO: remove
             }
         });
 
+        animationButton = findViewById(R.id.animation_button);
+        animationButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) { showAnimationActivity(); }
+        });
+
     }
 
     public void performSearch() {
@@ -102,33 +111,16 @@ TODO: remove
     }
 
     public void showFavoritesFragment() {
-
         favoritesFragment = new FavoritesFragment();
-
-        /*
-        Bundle repositoryBundle = new Bundle();
-
-        TransportObj transportObj = new TransportObj(movieResult);
-        repositoryBundle.putParcelable("FRAG_KEY", transportObj);
-        movieResultsFragment = new MovieResultsFragment();
-        //movieSearchFragment.setArguments(repositoryBundle);
-        movieResultsFragment.setArguments(repositoryBundle);
-*/
-        //Fragment fragment = getSupportFragmentManager().findFragmentById(R.id.results_frame);
-        //if(fragment != null)
-        //    getSupportFragmentManager().beginTransaction().remove(fragment).commit();
-
-//        getSupportFragmentManager()
-//                .beginTransaction()
-//                .add(R.id.search_frame, movieSearchFragment)
-//                .commit();
-
-        //DebugLogger.logDebug("showFragment...");
-
         getSupportFragmentManager()
                 .beginTransaction()
                 .replace(R.id.favorite_book_frame, favoritesFragment)
                 .commit();
+    }
+
+    public void showAnimationActivity() {
+        Intent intent = new Intent(this, AnimationActivity.class);
+        startActivity(intent);
     }
 
     @Override
@@ -164,5 +156,4 @@ TODO: remove
                 .remove(favoritesFragment)
                 .commit();
     }
-
 }
