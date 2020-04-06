@@ -4,6 +4,8 @@ import android.app.Application;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -51,6 +53,8 @@ public class GoogleBooksAdapter extends RecyclerView.Adapter<GoogleBooksAdapter.
         //logDebug("Book ImageURL: " + bookResults.get(position).getVolumeInfo().getImageLinks().getThumbnail());
         //logDebug("Book Title: " + bookResults.get(position).getVolumeInfo().getTitle());
         //logDebug("Book Authors: " + bookResults.get(position).getVolumeInfo().getAuthors().toString());
+        Animation slideInAnimation = AnimationUtils.loadAnimation(holder.itemView.getContext(), R.anim.slide_in_animation);
+        holder.itemView.startAnimation(slideInAnimation);
 
         //if (bookResults.get(position) != null) {
         try {
@@ -103,11 +107,11 @@ public class GoogleBooksAdapter extends RecyclerView.Adapter<GoogleBooksAdapter.
 
     class BookViewHolder extends RecyclerView.ViewHolder {
 
-        ImageView bookImage;
-        TextView bookTitle;
-        TextView bookAuthors;
-        TextView bookFavorite;
-        ToggleButton favoriteToggleButton;
+        private ImageView bookImage;
+        private TextView bookTitle;
+        private TextView bookAuthors;
+        private TextView bookFavorite;
+        private ToggleButton favoriteToggleButton;
 
         public BookViewHolder(@NonNull View itemView) {
             super(itemView);

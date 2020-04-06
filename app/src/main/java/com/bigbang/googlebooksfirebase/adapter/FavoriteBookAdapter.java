@@ -3,22 +3,19 @@ package com.bigbang.googlebooksfirebase.adapter;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.ToggleButton;
-
 import androidx.annotation.NonNull;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.RecyclerView;
-
 import com.bigbang.googlebooksfirebase.R;
 import com.bigbang.googlebooksfirebase.model.Book;
 import com.bigbang.googlebooksfirebase.view.MainActivity;
 import com.bigbang.googlebooksfirebase.viewmodel.GoogleBooksViewModel;
 import com.bumptech.glide.Glide;
-
 import java.util.List;
-
 import static com.bigbang.googlebooksfirebase.util.DebugLogger.logDebug;
 
 public class FavoriteBookAdapter extends RecyclerView.Adapter<FavoriteBookAdapter.FavoriteBookViewHolder> {
@@ -47,8 +44,10 @@ public class FavoriteBookAdapter extends RecyclerView.Adapter<FavoriteBookAdapte
 
         logDebug("title = " + bookResults.get(position).getTitle());
 
-        try {
+        Animation rotateSlideAnimation = AnimationUtils.loadAnimation(holder.itemView.getContext(), R.anim.rotate_slide_animation);
+        holder.itemView.startAnimation(rotateSlideAnimation);
 
+        try {
             if (bookResults.get(position) != null) {
 
                 Glide.with(theParent.getContext())
@@ -61,7 +60,6 @@ public class FavoriteBookAdapter extends RecyclerView.Adapter<FavoriteBookAdapte
             }
         }
         catch(Exception e){  e.printStackTrace(); }
-
     }
 
     @Override
@@ -70,9 +68,9 @@ public class FavoriteBookAdapter extends RecyclerView.Adapter<FavoriteBookAdapte
 
     class FavoriteBookViewHolder extends RecyclerView.ViewHolder {
 
-        ImageView bookImage;
-        TextView bookTitle;
-        TextView bookAuthors;
+        private ImageView bookImage;
+        private TextView bookTitle;
+        private TextView bookAuthors;
 
         public FavoriteBookViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -82,5 +80,4 @@ public class FavoriteBookAdapter extends RecyclerView.Adapter<FavoriteBookAdapte
             bookAuthors = itemView.findViewById(R.id.fav_book_authors_textview);
         }
     }
-
 }
